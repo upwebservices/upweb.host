@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.erled-agency.example/sitemap.xml
+
