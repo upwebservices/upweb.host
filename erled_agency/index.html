@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erled Agency | Maritime Solutions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-mQCk2BEmc6kAMPx/+qvOB0fOkH1ZZ1xdjQbaO5jM90+hCbGyF/F7kh/3Gzdh0dX8" crossorigin="anonymous" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" integrity="sha512-RXf+QSDCUQs6OGMw6rX3o5R16/fMJiceqd7qV3CyMfCVxYv3BPjVAk0nnk3uKxRykGGBqBPdZiZsa1+lZeX7mg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Erled Agency</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero d-flex align-items-center text-center text-white">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Navigating Your Cargo Worldwide</h1>
+      <p class="lead mb-4">Reliable maritime transport, container logistics, and precision electronic scale measurements.</p>
+      <a href="#contact" class="btn btn-lg btn-light text-primary fw-semibold">Request a Quote</a>
+    </div>
+  </section>
+
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="fw-bold mb-3">About Us</h2>
+          <p>Erled Agency is a trusted partner in maritime transportation and logistics. With decades of experience, our expert team ensures your cargo reaches its destination safely and on time. From container shipping and bulk transport to electronic scale measurements and port agency services, we provide comprehensive solutions tailored to your needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5">Our Services</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="service-box text-center p-4 h-100 shadow-sm">
+            <i class="fa-solid fa-ship fa-3x mb-3 text-primary"></i>
+            <h5 class="fw-semibold mb-2">Container Shipping</h5>
+            <p class="small">End-to-end container transport services with global coverage and real-time tracking.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="service-box text-center p-4 h-100 shadow-sm">
+            <i class="fa-solid fa-cubes fa-3x mb-3 text-primary"></i>
+            <h5 class="fw-semibold mb-2">Bulk Cargo</h5>
+            <p class="small">Efficient bulk cargo handling, ensuring safe and timely delivery of your goods.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="service-box text-center p-4 h-100 shadow-sm">
+            <i class="fa-solid fa-scale-balanced fa-3x mb-3 text-primary"></i>
+            <h5 class="fw-semibold mb-2">Electronic Scale Measurements</h5>
+            <p class="small">Accurate onboard and dockside weighing services for containers, vehicles, and cargo.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="service-box text-center p-4 h-100 shadow-sm">
+            <i class="fa-solid fa-warehouse fa-3x mb-3 text-primary"></i>
+            <h5 class="fw-semibold mb-2">Warehousing & Logistics</h5>
+            <p class="small">Secure warehousing solutions and last-mile logistics tailored to your supply chain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-5">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-4">Get in Touch</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <form class="row g-3" name="contact" data-netlify="true">
+            <div class="col-md-6">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" name="name" required />
+            </div>
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required />
+            </div>
+            <div class="col-12">
+              <label for="message" class="form-label">Message</label>
+              <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+            </div>
+            <div class="col-12 text-center">
+              <button type="submit" class="btn btn-primary px-5">Send Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-primary text-white text-center py-3">
+    <div class="container small">
+      <p class="mb-0">&copy; <span id="year"></span> Erled Agency. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-eZNMsMgNpOa5yZS4nVrLOT9e6x6tEN84ImU8vzU6RcaTfIY6M4ZaChkCGbdF1YzE" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+</html>
