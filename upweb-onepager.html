@@ -1,0 +1,1818 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1c3023" />
+    <title>UPWeb Services — One Pager</title>
+    <style>
+      :root {
+        --white: #ffffff;
+        --gold: #a68946;
+        --dark: #1c3023;
+        --dark-2: #132218;
+        --muted: rgba(28, 48, 35, 0.72);
+        --border: rgba(28, 48, 35, 0.14);
+        --shadow: 0 14px 35px rgba(28, 48, 35, 0.12);
+        --radius: 18px;
+        --radius-sm: 14px;
+        --max: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--dark);
+        background: var(--white);
+        line-height: 1.5;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .container {
+        width: min(var(--max), calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      /* Accessibility */
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 8px;
+        z-index: 9999;
+        background: var(--white);
+        border: 2px solid var(--gold);
+        color: var(--dark);
+        padding: 10px 12px;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+      }
+      .skip-link:focus {
+        left: 12px;
+        outline: none;
+      }
+      :focus-visible {
+        outline: 3px solid rgba(166, 137, 70, 0.55);
+        outline-offset: 2px;
+      }
+
+      /* Header / Nav */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 0;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 160px;
+      }
+      .brand img {
+        height: 44px;
+        width: auto;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-links > a,
+      .nav-links > button {
+        border: 1px solid transparent;
+        background: transparent;
+        padding: 10px 12px;
+        border-radius: 999px;
+        font: inherit;
+        color: var(--dark);
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .nav-links > a:hover,
+      .nav-links > button:hover {
+        text-decoration: none;
+        border-color: var(--border);
+        background: rgba(166, 137, 70, 0.08);
+      }
+
+      .dropdown {
+        position: relative;
+      }
+      .dropdown-panel {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 10px);
+        width: min(720px, calc(100vw - 30px));
+        background: var(--white);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+        padding: 14px;
+        display: none;
+      }
+      .dropdown-panel[data-open="true"] {
+        display: block;
+      }
+      .dropdown-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .dropdown-grid a {
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .dropdown-grid a:hover {
+        background: rgba(28, 48, 35, 0.03);
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 13px;
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(166, 137, 70, 0.35);
+        background: var(--gold);
+        color: var(--dark);
+        font-weight: 650;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 120ms ease, box-shadow 120ms ease,
+          background 120ms ease;
+      }
+      .btn:hover {
+        text-decoration: none;
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px rgba(166, 137, 70, 0.18);
+      }
+      .btn:active {
+        transform: translateY(0);
+      }
+      .btn.secondary {
+        background: transparent;
+        color: var(--dark);
+        border: 1px solid var(--border);
+      }
+      .btn.secondary:hover {
+        background: rgba(166, 137, 70, 0.08);
+        box-shadow: none;
+      }
+
+      .hamburger {
+        display: none;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.7);
+        padding: 10px 12px;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+      .hamburger .bars {
+        display: grid;
+        gap: 4px;
+      }
+      .hamburger .bars span {
+        width: 18px;
+        height: 2px;
+        background: var(--dark);
+        display: block;
+        border-radius: 3px;
+      }
+
+      .mobile-panel {
+        display: none;
+        padding: 12px 0 18px;
+        border-top: 1px solid var(--border);
+      }
+      .mobile-panel[data-open="true"] {
+        display: block;
+      }
+      .mobile-links {
+        display: grid;
+        gap: 10px;
+      }
+      .mobile-links a {
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        text-decoration: none;
+      }
+
+      /* Sections */
+      section {
+        padding: 70px 0;
+      }
+      .section-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+      .section-head h2 {
+        margin: 0;
+        font-size: clamp(26px, 3.2vw, 38px);
+        letter-spacing: -0.02em;
+      }
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 560px;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 72px 0 42px;
+        background: radial-gradient(
+            1200px 600px at 20% 0%,
+            rgba(166, 137, 70, 0.18),
+            transparent 50%
+          ),
+          radial-gradient(
+            900px 500px at 100% 10%,
+            rgba(28, 48, 35, 0.1),
+            transparent 45%
+          ),
+          linear-gradient(180deg, rgba(28, 48, 35, 0.02), transparent 60%);
+        border-bottom: 1px solid var(--border);
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 26px;
+        align-items: center;
+      }
+      .kicker {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+      .hero h1 {
+        margin: 0 0 12px;
+        font-size: clamp(34px, 4.6vw, 58px);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+      .rotator {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .rotator strong {
+        color: var(--gold);
+      }
+      .rotator .word {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(166, 137, 70, 0.35);
+        background: rgba(166, 137, 70, 0.08);
+        color: var(--dark);
+        font-weight: 750;
+        letter-spacing: -0.01em;
+      }
+      .hero p {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 17px;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 16px;
+      }
+      .trust-row {
+        margin-top: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .hero-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+      .hero-card .stat {
+        display: grid;
+        gap: 12px;
+      }
+      .stat .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 12px 12px;
+        background: rgba(28, 48, 35, 0.02);
+      }
+      .stat .label {
+        font-weight: 700;
+      }
+      .stat .value {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* Cards / grids */
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        background: var(--white);
+        box-shadow: 0 10px 22px rgba(28, 48, 35, 0.06);
+      }
+      .card h3 {
+        margin: 8px 0 6px;
+        font-size: 18px;
+        letter-spacing: -0.01em;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .card .topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: rgba(166, 137, 70, 0.12);
+        border: 1px solid rgba(166, 137, 70, 0.24);
+        color: var(--dark);
+        flex: 0 0 auto;
+      }
+      .card a.inline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+        color: var(--dark);
+        font-weight: 650;
+        text-decoration: none;
+      }
+      .card a.inline:hover {
+        text-decoration: underline;
+      }
+
+      /* Listings */
+      .listings .card {
+        padding: 18px;
+      }
+      .listings .card strong {
+        display: block;
+        margin-top: 2px;
+      }
+      .listings .card span {
+        display: block;
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* Clients / Partners */
+      .logo-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        align-items: stretch;
+      }
+      .logo-tile {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--white);
+        box-shadow: 0 10px 22px rgba(28, 48, 35, 0.06);
+        padding: 16px;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        gap: 10px;
+        text-decoration: none;
+      }
+      .logo-wrap {
+        height: 74px;
+        border-radius: 14px;
+        border: 1px dashed rgba(28, 48, 35, 0.22);
+        display: grid;
+        place-items: center;
+        background: rgba(28, 48, 35, 0.015);
+        padding: 10px;
+      }
+      .logo-wrap img {
+        max-height: 52px;
+        width: auto;
+        object-fit: contain;
+      }
+      .logo-tile .meta {
+        color: var(--muted);
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .logo-wrap.dark {
+        background: linear-gradient(
+          135deg,
+          rgba(28, 48, 35, 0.96),
+          rgba(19, 34, 24, 0.96)
+        );
+        border: 1px solid rgba(166, 137, 70, 0.25);
+      }
+      .logo-wrap.dark img {
+        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
+      }
+
+      .award {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        align-items: center;
+      }
+      .award-card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+      .award-card img {
+        width: 100%;
+        height: auto;
+      }
+      .award-card .body {
+        padding: 14px;
+      }
+      .award-card .body h3 {
+        margin: 0 0 6px;
+      }
+      .award-card .body p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .badges {
+        display: grid;
+        gap: 10px;
+      }
+      .badge-link {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 12px 12px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        text-decoration: none;
+        background: rgba(28, 48, 35, 0.02);
+      }
+
+      /* Why us / integrations */
+      .why {
+        background: linear-gradient(
+          180deg,
+          rgba(28, 48, 35, 0.03),
+          transparent 60%
+        );
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+      .two-col {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 14px;
+        align-items: start;
+      }
+      .bullets {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding-left: 18px;
+      }
+      .integrations {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .tag {
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* Testimonials */
+      .testimonials-wrap {
+        position: relative;
+      }
+      .slider {
+        overflow: hidden;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        background: var(--white);
+      }
+      .slides {
+        display: flex;
+        transition: transform 420ms ease;
+        will-change: transform;
+      }
+      .slide {
+        flex: 0 0 100%;
+        padding: 22px;
+        display: grid;
+        gap: 10px;
+      }
+      .quote {
+        font-size: 16px;
+        color: var(--dark);
+      }
+      .who {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .slider-controls {
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .arrows {
+        display: flex;
+        gap: 10px;
+      }
+      .icon-btn {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.7);
+        padding: 10px 12px;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+      .dots {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        border: 1px solid rgba(28, 48, 35, 0.25);
+        background: rgba(28, 48, 35, 0.08);
+        cursor: pointer;
+      }
+      .dot[data-active="true"] {
+        background: var(--gold);
+        border-color: rgba(166, 137, 70, 0.6);
+      }
+
+      /* Contact */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 14px;
+        align-items: start;
+      }
+      .contact-list {
+        display: grid;
+        gap: 10px;
+      }
+      .contact-item {
+        display: grid;
+        gap: 3px;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: rgba(28, 48, 35, 0.02);
+      }
+      .contact-item strong {
+        font-size: 14px;
+      }
+      .contact-item a {
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: 650;
+      }
+      .contact-item a:hover {
+        text-decoration: underline;
+      }
+      .map {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 10px 22px rgba(28, 48, 35, 0.06);
+        background: var(--white);
+      }
+      .map iframe {
+        width: 100%;
+        height: 360px;
+        border: 0;
+      }
+      .social-row {
+        margin-top: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .social-row a {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 10px 12px;
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.7);
+      }
+      .social-row a:hover {
+        background: rgba(166, 137, 70, 0.08);
+      }
+
+      /* Form */
+      form {
+        display: grid;
+        gap: 12px;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      label {
+        display: grid;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 12px;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        font: inherit;
+        background: var(--white);
+        color: var(--dark);
+      }
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .check-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px 12px;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: rgba(28, 48, 35, 0.02);
+      }
+      .check {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        font-size: 14px;
+        color: var(--dark);
+      }
+      .check input {
+        width: 18px;
+        height: 18px;
+        margin-top: 2px;
+      }
+      .form-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .note {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .toast {
+        display: none;
+        margin-top: 10px;
+        border: 1px solid rgba(166, 137, 70, 0.35);
+        background: rgba(166, 137, 70, 0.1);
+        color: var(--dark);
+        padding: 12px;
+        border-radius: var(--radius);
+      }
+      .toast[data-open="true"] {
+        display: block;
+      }
+
+      /* Footer */
+      footer {
+        padding: 30px 0;
+        border-top: 1px solid var(--border);
+        background: rgba(28, 48, 35, 0.02);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        align-items: center;
+      }
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+      .footer-links a {
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.7);
+      }
+      .footer-links a:hover {
+        background: rgba(166, 137, 70, 0.08);
+      }
+      .small {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* Responsive */
+      @media (max-width: 980px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .grid-4 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .logo-row {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .award {
+          grid-template-columns: 1fr;
+        }
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 860px) {
+        .nav-links {
+          display: none;
+        }
+        .hamburger {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+      @media (max-width: 560px) {
+        section {
+          padding: 56px 0;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .check-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-links {
+          justify-content: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="header" id="top">
+      <div class="container">
+        <nav class="nav" aria-label="Primary navigation">
+          <a class="brand" href="https://upwebservices.com/" target="_blank" rel="noopener">
+            <img
+              src="https://upwebservices.com/wp-content/uploads/elementor/thumbs/UPWEB-SERVICES-scaled-rhlb08pwy1tc0ugcx88keq1cdi8hi2l2pczm9xjc4s.webp"
+              alt="UPWeb Services"
+              loading="eager"
+              decoding="async"
+            />
+          </a>
+
+          <div class="nav-links" role="navigation">
+            <a href="https://upwebservices.com/portfolios/" target="_blank" rel="noopener">Portfolios</a>
+            <a href="https://upwebservices.com/academy/" target="_blank" rel="noopener">Blog</a>
+            <a href="https://upwebservices.com/paketat/" target="_blank" rel="noopener">Packages</a>
+
+            <div class="dropdown">
+              <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                Services <span aria-hidden="true">▾</span>
+              </button>
+              <div class="dropdown-panel" role="menu" aria-label="Services submenu">
+                <div class="pill" style="margin-bottom: 10px">
+                  Expert IT + Marketing solutions — choose a service
+                </div>
+                <div class="dropdown-grid">
+                  <a role="menuitem" href="https://upwebservices.com/services-hub/" target="_blank" rel="noopener"
+                    >Services Hub <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/dizenjim-uebfaqe-website-design/" target="_blank" rel="noopener"
+                    >Web Design <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/all-up-tools/" target="_blank" rel="noopener"
+                    >UP Tools Suite <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/menaxhim-i-rrjeteve-sociale-ne-durres/" target="_blank" rel="noopener"
+                    >Social Media Management <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/ads/" target="_blank" rel="noopener"
+                    >Ads <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/siguri-uebi/" target="_blank" rel="noopener"
+                    >Web Security <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/zgjidhje-sigurie-profesionale/" target="_blank" rel="noopener"
+                    >Cyber Security <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/mirembajtje-rrjeti/" target="_blank" rel="noopener"
+                    >Network Maintenance <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/sistemet-audio-ne-durres-albania/" target="_blank" rel="noopener"
+                    >Audio &amp; Video <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/sisteme-te-integruara/" target="_blank" rel="noopener"
+                    >Integrated Systems <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/ndricimi-dhe-efektet/" target="_blank" rel="noopener"
+                    >Lighting &amp; Effects <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/sisteme-hoteleri/" target="_blank" rel="noopener"
+                    >Hotel Systems <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/reklama-led/" target="_blank" rel="noopener"
+                    >Reklama Led <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/electronic-reseller/" target="_blank" rel="noopener"
+                    >Electronic Reseller <span aria-hidden="true">→</span></a
+                  >
+                  <a role="menuitem" href="https://upwebservices.com/upweb-all-in-one/" target="_blank" rel="noopener"
+                    >All-In-One <span aria-hidden="true">→</span></a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <a href="https://upwebservices.com/contact/" target="_blank" rel="noopener">Contact</a>
+          </div>
+
+          <div class="nav-cta">
+            <a class="btn" href="#questionnaire">Get a Quote</a>
+            <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false">
+              <span class="bars" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </span>
+              <span style="font-weight: 650; color: var(--muted); font-size: 14px">Menu</span>
+            </button>
+          </div>
+        </nav>
+
+        <div class="mobile-panel" data-open="false">
+          <div class="mobile-links">
+            <a href="https://upwebservices.com/portfolios/" target="_blank" rel="noopener">Portfolios</a>
+            <a href="https://upwebservices.com/academy/" target="_blank" rel="noopener">Blog</a>
+            <a href="https://upwebservices.com/paketat/" target="_blank" rel="noopener">Packages</a>
+            <a href="https://upwebservices.com/services-hub/" target="_blank" rel="noopener">Services Hub</a>
+            <a href="#services">Services (on this page)</a>
+            <a href="#clients">Clients &amp; Partners</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-label="Homepage hero">
+        <div class="container">
+          <div class="hero-grid">
+            <div>
+              <div class="kicker">
+                <span class="pill">IT • Web • Marketing • Security</span>
+                <span class="pill">Durrës, Albania • Serving EU &amp; Beyond</span>
+              </div>
+
+              <h1>
+                <span class="rotator">
+                  Your
+                  <span class="word" id="rotateWord">Web Design</span>
+                  <strong>Solutions</strong>
+                  Company
+                </span>
+              </h1>
+
+              <p>
+                UPWeb Services helps businesses grow with expert IT and marketing solutions. We specialize in
+                web design, digital marketing, and business support to boost your success.
+              </p>
+
+              <div class="hero-actions">
+                <a class="btn" href="#services">Explore Services</a>
+                <a class="btn secondary" href="#contact">Contact Us</a>
+              </div>
+
+              <div class="trust-row">
+                <span><strong style="color: var(--dark)">Trusted by</strong> businesses across Albania &amp; Europe</span>
+                <span aria-hidden="true">•</span>
+                <span>Fast delivery • Secure systems • Reliable support</span>
+              </div>
+            </div>
+
+            <aside class="hero-card" aria-label="Quick links">
+              <div class="stat">
+                <div class="row">
+                  <div>
+                    <div class="label">Call / WhatsApp</div>
+                    <div class="value">+355 68 241 9580</div>
+                  </div>
+                  <a class="btn secondary" href="tel:+355682419580">Call</a>
+                </div>
+                <div class="row">
+                  <div>
+                    <div class="label">Email</div>
+                    <div class="value">info@upwebservices.com</div>
+                  </div>
+                  <a class="btn secondary" href="mailto:info@upwebservices.com">Email</a>
+                </div>
+                <div class="row">
+                  <div>
+                    <div class="label">Services Hub</div>
+                    <div class="value">Browse everything we offer</div>
+                  </div>
+                  <a class="btn secondary" href="https://upwebservices.com/services-hub/" target="_blank" rel="noopener">Open</a>
+                </div>
+                <div class="row">
+                  <div>
+                    <div class="label">Portfolios</div>
+                    <div class="value">See recent work &amp; case studies</div>
+                  </div>
+                  <a class="btn secondary" href="https://upwebservices.com/portfolios/" target="_blank" rel="noopener">View</a>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="listings" id="listings" aria-label="Listings and links">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Links for Listings</h2>
+              <p>Quick access to portfolios, packages, platforms, and trusted profiles.</p>
+            </div>
+          </div>
+
+          <div class="grid-4">
+            <a class="card" href="https://upwebservices.com/portfolios/" target="_blank" rel="noopener">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">🗂️</div>
+                <span class="pill">UPWeb</span>
+              </div>
+              <strong>Portfolios</strong>
+              <span>Work, websites, and case studies</span>
+            </a>
+
+            <a class="card" href="https://upwebservices.com/paketat/" target="_blank" rel="noopener">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">📦</div>
+                <span class="pill">UPWeb</span>
+              </div>
+              <strong>Packages</strong>
+              <span>Service bundles &amp; offers</span>
+            </a>
+
+            <a class="card" href="https://menujaime.com/" target="_blank" rel="noopener">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">🍽️</div>
+                <span class="pill">Platform</span>
+              </div>
+              <strong>Menuja Ime</strong>
+              <span>Restaurant menus &amp; ordering</span>
+            </a>
+
+            <a class="card" href="https://www.easyrentalb.com/" target="_blank" rel="noopener">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">🚗</div>
+                <span class="pill">Platform</span>
+              </div>
+              <strong>Easy Rent Albania</strong>
+              <span>Car rental website &amp; marketing</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" aria-label="Services">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Services</h2>
+              <p>Web, IT, security, and marketing — built to help your business grow.</p>
+            </div>
+            <div>
+              <a class="btn secondary" href="https://upwebservices.com/services-hub/" target="_blank" rel="noopener">Open Services Hub</a>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="card">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">🖥️</div>
+                <span class="pill">Web</span>
+              </div>
+              <h3>Web Design</h3>
+              <p>Modern, fast, SEO-ready websites built for conversions and a premium brand feel.</p>
+              <a class="inline" href="https://upwebservices.com/dizenjim-uebfaqe-website-design/" target="_blank" rel="noopener"
+                >Learn more →</a
+              >
+            </div>
+
+            <div class="card">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">📣</div>
+                <span class="pill">Growth</span>
+              </div>
+              <h3>Digital Ads</h3>
+              <p>Ads strategy &amp; execution to capture demand and scale leads or sales.</p>
+              <a class="inline" href="https://upwebservices.com/ads/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+
+            <div class="card">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">📱</div>
+                <span class="pill">Social</span>
+              </div>
+              <h3>Social Media Management</h3>
+              <p>Consistent content + smart management to build trust and keep your brand active.</p>
+              <a class="inline" href="https://upwebservices.com/menaxhim-i-rrjeteve-sociale-ne-durres/" target="_blank" rel="noopener"
+                >Learn more →</a
+              >
+            </div>
+
+            <div class="card">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">🛡️</div>
+                <span class="pill">Security</span>
+              </div>
+              <h3>Web Security</h3>
+              <p>Hardening, protection, monitoring, and best practices to keep your site safe.</p>
+              <a class="inline" href="https://upwebservices.com/siguri-uebi/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+
+            <div class="card">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">🧰</div>
+                <span class="pill">Tools</span>
+              </div>
+              <h3>UP Tools Suite</h3>
+              <p>Handy tools and utilities designed to support daily business operations.</p>
+              <a class="inline" href="https://upwebservices.com/all-up-tools/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+
+            <div class="card">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">🌐</div>
+                <span class="pill">IT</span>
+              </div>
+              <h3>Network Maintenance</h3>
+              <p>Stable networks, proactive fixes, and reliable connectivity for your workplace.</p>
+              <a class="inline" href="https://upwebservices.com/mirembajtje-rrjeti/" target="_blank" rel="noopener">Learn more →</a>
+            </div>
+          </div>
+
+          <div style="margin-top: 14px" class="card">
+            <div class="topline">
+              <div>
+                <h3 style="margin: 0 0 6px">More services</h3>
+                <p style="margin: 0; color: var(--muted)">
+                  Explore additional solutions: surveillance, hotel systems, audio/video, lighting, integrated systems and more.
+                </p>
+              </div>
+              <button class="btn secondary" type="button" id="moreServicesToggle" aria-expanded="false">
+                Show list
+              </button>
+            </div>
+            <div id="moreServices" style="display: none; margin-top: 12px">
+              <div class="grid-4">
+                <a class="card" href="https://upwebservices.com/reklama-led/" target="_blank" rel="noopener">Reklama Led</a>
+                <a class="card" href="https://upwebservices.com/upweb-all-in-one/" target="_blank" rel="noopener">All-In-One</a>
+                <a class="card" href="https://upwebservices.com/sistemet-audio-ne-durres-albania/" target="_blank" rel="noopener"
+                  >Audio &amp; Video</a
+                >
+                <a class="card" href="https://upwebservices.com/sisteme-te-integruara/" target="_blank" rel="noopener"
+                  >Integrated Systems</a
+                >
+                <a class="card" href="https://upwebservices.com/ndricimi-dhe-efektet/" target="_blank" rel="noopener"
+                  >Lighting &amp; Effects</a
+                >
+                <a class="card" href="https://upwebservices.com/sisteme-hoteleri/" target="_blank" rel="noopener">Hotel Systems</a>
+                <a class="card" href="https://upwebservices.com/zgjidhje-sigurie-profesionale/" target="_blank" rel="noopener"
+                  >Cyber Security</a
+                >
+                <a class="card" href="https://upwebservices.com/electronic-reseller/" target="_blank" rel="noopener"
+                  >Electronic Reseller</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="why" id="why-us" aria-label="Why us and integrations">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Why us?</h2>
+              <p>A short section about what makes UPWeb Services a reliable partner.</p>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div class="card">
+              <h3 style="margin-top: 0">Built on reliability</h3>
+              <ul class="bullets">
+                <li><strong>Fast delivery</strong> with clear milestones and communication.</li>
+                <li><strong>Security-first</strong> mindset for websites, accounts, and IT systems.</li>
+                <li><strong>Business-focused</strong> solutions that improve real outcomes (leads, sales, trust).</li>
+                <li><strong>Long-term support</strong> after launch: maintenance, upgrades, and optimization.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3 style="margin-top: 0">Our integrations</h3>
+              <p style="margin-top: 0; color: var(--muted)">
+                We connect your website and marketing stack so you can track results and automate workflows.
+              </p>
+              <div class="integrations" aria-label="Integrations">
+                <span class="tag">WordPress</span>
+                <span class="tag">Elementor</span>
+                <span class="tag">WooCommerce</span>
+                <span class="tag">GA4</span>
+                <span class="tag">Google Ads</span>
+                <span class="tag">Search Console</span>
+                <span class="tag">Meta Ads</span>
+                <span class="tag">WhatsApp</span>
+                <span class="tag">Mailchimp</span>
+                <span class="tag">Zapier</span>
+                <span class="tag">CRM setup</span>
+                <span class="tag">Payments</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="clients" aria-label="Clients and partners">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Some of our clients</h2>
+              <p>Brands that have trusted UPWeb Services with their growth.</p>
+            </div>
+          </div>
+
+          <div class="logo-row">
+            <a class="logo-tile" href="https://aaauditfinance.com/" target="_blank" rel="noopener">
+              <div class="logo-wrap">
+                <img
+                  src="https://aaauditfinance.com/wp-content/uploads/2025/12/Add-a-heading-1.png"
+                  alt="AA Audit & Finance logo"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="meta">
+                <span>AA Audit &amp; Finance</span>
+                <span aria-hidden="true">↗</span>
+              </div>
+            </a>
+
+            <a class="logo-tile" href="https://ami-dental.com/" target="_blank" rel="noopener">
+              <div class="logo-wrap">
+                <img
+                  src="https://ami-dental.com/wp-content/uploads/2025/12/cropped-cropped-ami-dental.png"
+                  alt="Ami Dental logo"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="meta">
+                <span>Ami Dental</span>
+                <span aria-hidden="true">↗</span>
+              </div>
+            </a>
+
+            <a class="logo-tile" href="https://www.petani-lawfirm.com/" target="_blank" rel="noopener">
+              <div class="logo-wrap dark">
+                <img
+                  src="https://www.petani-lawfirm.com/wp-content/uploads/2025/04/cropped-Untitled-design-28-2048x1024.png"
+                  alt="Petani Law Firm logo"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="meta">
+                <span>Petani Law Firm</span>
+                <span aria-hidden="true">↗</span>
+              </div>
+            </a>
+
+            <a class="logo-tile" href="https://lamusedurres.com/grillfather/" target="_blank" rel="noopener">
+              <div class="logo-wrap">
+                <img
+                  src="https://lamusedurres.com/grillfather/wp-content/uploads/2025/12/images__3_-removebg-preview.png"
+                  alt="The Grillfather logo"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="meta">
+                <span>The Grillfather</span>
+                <span aria-hidden="true">↗</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="award" aria-label="Awards and partner profiles">
+            <a
+              class="award-card"
+              href="https://techbehemoths.com/awards-2025/certificates/f14aa8be-ea0c-4b72-983d-40c7da6ff29a"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                src="https://upwebservices.com/wp-content/uploads/2025/12/certificate-f14aa8be-ea0c-4b72-983d-40c7da6ff29a-scaled.webp"
+                alt="Tech Behemoths Award Certificate"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="body">
+                <h3>Tech Behemoths Award</h3>
+                <p>Tap the certificate to open the official verification page.</p>
+              </div>
+            </a>
+
+            <div class="badges">
+              <div class="card" style="padding: 16px">
+                <h3 style="margin-top: 0">Partners &amp; profiles</h3>
+                <p style="margin-top: 0">Find UPWeb Services on trusted directories.</p>
+              </div>
+              <a class="badge-link" href="https://www.goodfirms.co/company/upweb-services" target="_blank" rel="noopener"
+                ><span>GoodFirms</span><span aria-hidden="true">↗</span></a
+              >
+              <a class="badge-link" href="https://businessfirms.co/company/upweb-services" target="_blank" rel="noopener"
+                ><span>BusinessFirms</span><span aria-hidden="true">↗</span></a
+              >
+              <a class="badge-link" href="https://techbehemoths.com/company/upweb-services" target="_blank" rel="noopener"
+                ><span>TechBehemoths</span><span aria-hidden="true">↗</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" aria-label="Testimonials">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Testimonials</h2>
+              <p>Hear from our customers. Join businesses that have trusted us with their growth.</p>
+            </div>
+          </div>
+
+          <div class="testimonials-wrap">
+            <div class="slider" aria-roledescription="carousel" aria-label="Customer testimonials">
+              <div class="slides" id="slides">
+                <div class="slide" role="group" aria-label="Testimonial 1 of 3">
+                  <div class="pill">Italy</div>
+                  <div class="quote">
+                    “One quality that I appreciate most from a company is reliability. I must say that UPWeb is not only
+                    reliable but also competent, helpful and attentive to customer needs. Three characteristics that make
+                    a company the best. Thank you.”
+                  </div>
+                  <div class="who">
+                    <span><strong>Piergiorgio Carlini</strong></span>
+                    <span>Customer</span>
+                  </div>
+                </div>
+
+                <div class="slide" role="group" aria-label="Testimonial 2 of 3">
+                  <div class="pill">Albania</div>
+                  <div class="quote">
+                    “Amazing website, fast service, and great job on security. We highly recommend UPWeb.”
+                  </div>
+                  <div class="who">
+                    <span><strong>Ilda Kadrimi</strong> — Owner of AA Audit &amp; Finance</span>
+                    <span>Client</span>
+                  </div>
+                </div>
+
+                <div class="slide" role="group" aria-label="Testimonial 3 of 3">
+                  <div class="pill">Albania</div>
+                  <div class="quote">
+                    “Fastest and most reliable IT services in Durres. Amazing website design, and social media management.”
+                  </div>
+                  <div class="who">
+                    <span><strong>Armand Blaceri</strong> — Owner of Ami Dental</span>
+                    <span>Client</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="slider-controls">
+              <div class="arrows">
+                <button class="icon-btn" type="button" id="prevBtn" aria-label="Previous testimonial">←</button>
+                <button class="icon-btn" type="button" id="nextBtn" aria-label="Next testimonial">→</button>
+              </div>
+              <div class="dots" aria-label="Carousel pagination">
+                <button class="dot" type="button" data-index="0" data-active="true" aria-label="Go to testimonial 1"></button>
+                <button class="dot" type="button" data-index="1" aria-label="Go to testimonial 2"></button>
+                <button class="dot" type="button" data-index="2" aria-label="Go to testimonial 3"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="questionnaire" aria-label="Questionnaire">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Questionnaire</h2>
+              <p>Tell us what you need. This form will generate a ready-to-send email to <strong>info@upwebservices.com</strong>.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <form id="quoteForm">
+              <div class="form-grid">
+                <label>
+                  Full name
+                  <input name="name" autocomplete="name" required placeholder="Your name" />
+                </label>
+                <label>
+                  Business name
+                  <input name="business" autocomplete="organization" placeholder="Company / brand" />
+                </label>
+                <label>
+                  Email
+                  <input name="email" type="email" autocomplete="email" required placeholder="you@company.com" />
+                </label>
+                <label>
+                  Phone / WhatsApp
+                  <input name="phone" autocomplete="tel" placeholder="+355 ..." />
+                </label>
+              </div>
+
+              <div>
+                <div class="pill" style="margin-bottom: 10px">Services you’re interested in</div>
+                <div class="check-grid">
+                  <label class="check"><input type="checkbox" name="services" value="Web Design" /> Web Design</label>
+                  <label class="check"><input type="checkbox" name="services" value="Digital Marketing / Ads" /> Digital Marketing / Ads</label>
+                  <label class="check"><input type="checkbox" name="services" value="Social Media Management" /> Social Media Management</label>
+                  <label class="check"><input type="checkbox" name="services" value="Web Security" /> Web Security</label>
+                  <label class="check"><input type="checkbox" name="services" value="Cyber Security" /> Cyber Security</label>
+                  <label class="check"><input type="checkbox" name="services" value="Network Maintenance" /> Network Maintenance</label>
+                  <label class="check"><input type="checkbox" name="services" value="Audio & Video Systems" /> Audio &amp; Video Systems</label>
+                  <label class="check"><input type="checkbox" name="services" value="Hotel / Integrated Systems" /> Hotel / Integrated Systems</label>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <label>
+                  Budget range
+                  <select name="budget">
+                    <option value="">Select</option>
+                    <option value="Under €300">Under €300</option>
+                    <option value="€300–€800">€300–€800</option>
+                    <option value="€800–€2000">€800–€2000</option>
+                    <option value="€2000+">€2000+</option>
+                  </select>
+                </label>
+                <label>
+                  Timeline
+                  <select name="timeline">
+                    <option value="">Select</option>
+                    <option value="ASAP">ASAP</option>
+                    <option value="2–4 weeks">2–4 weeks</option>
+                    <option value="1–2 months">1–2 months</option>
+                    <option value="Flexible">Flexible</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                Current website (if any)
+                <input name="website" placeholder="https://..." />
+              </label>
+
+              <label>
+                What are your goals?
+                <textarea name="goals" placeholder="More leads, better brand image, online sales, bookings, security, etc."></textarea>
+              </label>
+
+              <div class="form-actions">
+                <button class="btn" type="submit">Generate Email</button>
+                <button class="btn secondary" type="button" id="copyBtn">Copy message</button>
+                <span class="note">No backend needed — safe for Elementor Canvas pages.</span>
+              </div>
+
+              <div class="toast" id="toast" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="blog" aria-label="Blog">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Blog</h2>
+              <p>Guides, tips, and updates from the UPWeb Academy.</p>
+            </div>
+            <div>
+              <a class="btn secondary" href="https://upwebservices.com/academy/" target="_blank" rel="noopener">Browse Academy</a>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <a class="card" href="https://upwebservices.com/academy/" target="_blank" rel="noopener">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">📚</div>
+                <span class="pill">UPWeb Academy</span>
+              </div>
+              <h3>Learn SEO basics</h3>
+              <p>Practical content to help your site rank and get more traffic.</p>
+              <span class="note" style="display: inline-block; margin-top: 10px">Open blog →</span>
+            </a>
+            <a class="card" href="https://upwebservices.com/academy/" target="_blank" rel="noopener">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">🧠</div>
+                <span class="pill">Strategy</span>
+              </div>
+              <h3>Digital marketing tips</h3>
+              <p>Campaign structure, creatives, and conversion-focused advice.</p>
+              <span class="note" style="display: inline-block; margin-top: 10px">Open blog →</span>
+            </a>
+            <a class="card" href="https://upwebservices.com/academy/" target="_blank" rel="noopener">
+              <div class="topline">
+                <div class="icon" aria-hidden="true">🛡️</div>
+                <span class="pill">Security</span>
+              </div>
+              <h3>Website security guides</h3>
+              <p>Best practices to protect accounts, sites, and business systems.</p>
+              <span class="note" style="display: inline-block; margin-top: 10px">Open blog →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" aria-label="Contact and social links">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Contact</h2>
+              <p>Reach out anytime — we’ll respond quickly with next steps.</p>
+            </div>
+            <div>
+              <a class="btn" href="https://upwebservices.com/contact/" target="_blank" rel="noopener">Open Contact Page</a>
+            </div>
+          </div>
+
+          <div class="contact-grid">
+            <div>
+              <div class="contact-list">
+                <div class="contact-item">
+                  <strong>Phone</strong>
+                  <a href="tel:+355682419580">+355 68 241 9580</a>
+                  <span class="small">Call / WhatsApp</span>
+                </div>
+                <div class="contact-item">
+                  <strong>Email</strong>
+                  <a href="mailto:info@upwebservices.com">info@upwebservices.com</a>
+                  <span class="small">Business inquiries</span>
+                </div>
+                <div class="contact-item">
+                  <strong>Address</strong>
+                  <a href="https://maps.app.goo.gl/bvLQQjuteTPRhFSh7" target="_blank" rel="noopener">
+                    Rruga Kristaq Boshnjaku, Durrës, Albania
+                  </a>
+                  <span class="small">Open in Google Maps</span>
+                </div>
+              </div>
+
+              <div class="social-row" aria-label="Social links">
+                <a href="https://instagram.com/upwebal" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://facebook.com/upwebal" target="_blank" rel="noopener">Facebook</a>
+                <a href="https://www.linkedin.com/in/upweb-services/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://www.youtube.com/@upwebal" target="_blank" rel="noopener">YouTube</a>
+                <a href="https://www.goodfirms.co/company/upweb-services" target="_blank" rel="noopener">GoodFirms</a>
+                <a href="https://businessfirms.co/company/upweb-services" target="_blank" rel="noopener">BusinessFirms</a>
+                <a href="https://techbehemoths.com/company/upweb-services" target="_blank" rel="noopener">TechBehemoths</a>
+              </div>
+            </div>
+
+            <div class="map" aria-label="Map">
+              <iframe
+                title="UPWeb Services location map"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Rruga%20Kristaq%20Boshnjaku%20Durr%C3%ABs%2C%20Albania&output=embed"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer aria-label="Footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+              <img
+                src="https://upwebservices.com/wp-content/uploads/elementor/thumbs/UPWEB-SERVICES-scaled-rhlb08pwy1tc0ugcx88keq1cdi8hi2l2pczm9xjc4s.webp"
+                alt="UPWeb Services logo"
+                style="height: 36px; width: auto"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="small">©UPWeb Services 2020-2025 . All Rights Reserved.</span>
+            </div>
+            <div class="small" style="margin-top: 10px">
+              <a href="#top">Back to top</a>
+            </div>
+          </div>
+
+          <div class="footer-links" aria-label="Footer menu">
+            <a href="https://upwebservices.com/portfolios/" target="_blank" rel="noopener">Portfolios</a>
+            <a href="https://upwebservices.com/services-hub/" target="_blank" rel="noopener">Services</a>
+            <a href="https://upwebservices.com/academy/" target="_blank" rel="noopener">Blog</a>
+            <a href="https://upwebservices.com/contact/" target="_blank" rel="noopener">Contact</a>
+            <a href="https://upwebservices.com/terms-and-conditions/" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+            <a href="https://upwebservices.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Header: dropdown + mobile menu
+      (function () {
+        const dropdownToggle = document.querySelector(".dropdown-toggle");
+        const dropdownPanel = document.querySelector(".dropdown-panel");
+        const mobileBtn = document.querySelector(".hamburger");
+        const mobilePanel = document.querySelector(".mobile-panel");
+
+        function closeDropdown() {
+          dropdownPanel?.setAttribute("data-open", "false");
+          dropdownToggle?.setAttribute("aria-expanded", "false");
+        }
+
+        dropdownToggle?.addEventListener("click", () => {
+          const isOpen = dropdownPanel.getAttribute("data-open") === "true";
+          dropdownPanel.setAttribute("data-open", String(!isOpen));
+          dropdownToggle.setAttribute("aria-expanded", String(!isOpen));
+        });
+
+        document.addEventListener("click", (e) => {
+          const t = e.target;
+          const within = t && (t.closest?.(".dropdown") || t.closest?.(".dropdown-panel"));
+          if (!within) closeDropdown();
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeDropdown();
+        });
+
+        mobileBtn?.addEventListener("click", () => {
+          const isOpen = mobilePanel.getAttribute("data-open") === "true";
+          mobilePanel.setAttribute("data-open", String(!isOpen));
+          mobileBtn.setAttribute("aria-expanded", String(!isOpen));
+        });
+      })();
+
+      // Hero rotator words
+      (function () {
+        const el = document.getElementById("rotateWord");
+        if (!el) return;
+        const words = [
+          "Web Design",
+          "IT",
+          "Digital Marketing",
+          "SEO",
+          "Branding",
+          "CRM",
+          "Surveillance & Network",
+        ];
+        let i = 0;
+        setInterval(() => {
+          i = (i + 1) % words.length;
+          el.style.opacity = "0";
+          setTimeout(() => {
+            el.textContent = words[i];
+            el.style.opacity = "1";
+          }, 180);
+        }, 1800);
+      })();
+
+      // More services toggle
+      (function () {
+        const btn = document.getElementById("moreServicesToggle");
+        const panel = document.getElementById("moreServices");
+        if (!btn || !panel) return;
+        btn.addEventListener("click", () => {
+          const open = panel.style.display !== "none";
+          panel.style.display = open ? "none" : "block";
+          btn.textContent = open ? "Show list" : "Hide list";
+          btn.setAttribute("aria-expanded", String(!open));
+        });
+      })();
+
+      // Testimonials slider
+      (function () {
+        const slides = document.getElementById("slides");
+        if (!slides) return;
+        const dots = Array.from(document.querySelectorAll(".dot"));
+        const prev = document.getElementById("prevBtn");
+        const next = document.getElementById("nextBtn");
+        const total = dots.length;
+        let index = 0;
+
+        function go(i) {
+          index = (i + total) % total;
+          slides.style.transform = `translateX(${-index * 100}%)`;
+          dots.forEach((d) => d.setAttribute("data-active", String(d.dataset.index === String(index))));
+        }
+
+        prev?.addEventListener("click", () => go(index - 1));
+        next?.addEventListener("click", () => go(index + 1));
+        dots.forEach((d) => d.addEventListener("click", () => go(Number(d.dataset.index || "0"))));
+
+        let timer = setInterval(() => go(index + 1), 7000);
+        const wrap = document.querySelector(".testimonials-wrap");
+        wrap?.addEventListener("mouseenter", () => clearInterval(timer));
+        wrap?.addEventListener("mouseleave", () => (timer = setInterval(() => go(index + 1), 7000)));
+      })();
+
+      // Questionnaire: build mailto + copy
+      (function () {
+        const form = document.getElementById("quoteForm");
+        const toast = document.getElementById("toast");
+        const copyBtn = document.getElementById("copyBtn");
+        if (!form || !toast || !copyBtn) return;
+
+        function showToast(msg) {
+          toast.textContent = msg;
+          toast.setAttribute("data-open", "true");
+          window.clearTimeout(showToast._t);
+          showToast._t = window.setTimeout(() => toast.setAttribute("data-open", "false"), 5200);
+        }
+
+        function buildMessage() {
+          const fd = new FormData(form);
+          const services = Array.from(form.querySelectorAll('input[name="services"]:checked')).map((i) => i.value);
+
+          const lines = [
+            "Hello UPWeb Services,",
+            "",
+            "I would like a quote / consultation.",
+            "",
+            `Name: ${fd.get("name") || ""}`,
+            `Business: ${fd.get("business") || ""}`,
+            `Email: ${fd.get("email") || ""}`,
+            `Phone/WhatsApp: ${fd.get("phone") || ""}`,
+            "",
+            `Interested services: ${services.length ? services.join(", ") : "—"}`,
+            `Budget: ${fd.get("budget") || "—"}`,
+            `Timeline: ${fd.get("timeline") || "—"}`,
+            `Current website: ${fd.get("website") || "—"}`,
+            "",
+            "Goals / details:",
+            String(fd.get("goals") || "").trim() || "—",
+            "",
+            "Thank you!",
+          ];
+          return lines.join("\n");
+        }
+
+        function buildMailto() {
+          const subject = "UPWeb Services — Quote request";
+          const body = buildMessage();
+          return `mailto:info@upwebservices.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const url = buildMailto();
+          window.location.href = url;
+          showToast("Email generated — your mail app should open. If not, use “Copy message”.");
+        });
+
+        copyBtn.addEventListener("click", async () => {
+          try {
+            const msg = buildMessage();
+            await navigator.clipboard.writeText(msg);
+            showToast("Copied! Paste it into an email to info@upwebservices.com.");
+          } catch {
+            showToast("Copy failed in this browser. Please submit to generate the email instead.");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
