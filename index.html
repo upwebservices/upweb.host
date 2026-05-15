@@ -309,6 +309,7 @@
       position: relative;
       display: inline-block;
       width: 100%;
+      margin: 0;
     }
 
     .headline-layer {
@@ -983,6 +984,25 @@
         grid-template-columns: 1fr 1fr;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .eye-orbital::before,
+      .eye-orbital::after,
+      .scan-line,
+      .floating-orb,
+      .btn,
+      .service-card,
+      .story-card,
+      .testimonial-card,
+      .visual-stack {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1007,7 +1027,7 @@
         <div class="hero-copy">
           <span class="eyebrow">Advanced vision care for modern patients</span>
           <div class="headline-lab" id="headlineLab">
-            <div class="headline-track">
+            <h1 class="headline-track">
               <span class="headline-layer blurred">See your world
 with clarity again.</span>
               <span class="headline-layer focused" aria-hidden="true">See your world
@@ -1018,7 +1038,7 @@ with clarity again.</span>
                 <span class="temple left"></span>
                 <span class="temple right"></span>
               </div>
-            </div>
+            </h1>
           </div>
           <p class="hero-intro">
             Premium eye exams, designer frames, dry eye care, and digital vision therapy in one immersive clinic experience.
@@ -1271,6 +1291,7 @@ with clarity again.</span>
     const headlineLab = document.getElementById("headlineLab");
     const visualStack = document.getElementById("visualStack");
     const tiltCards = document.querySelectorAll(".tilt-card");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     let lensProgress = 0.5;
     let lensTarget = 0.5;
@@ -1319,16 +1340,20 @@ with clarity again.</span>
       });
     });
 
-    window.addEventListener("pointermove", (event) => {
-      const x = (event.clientX / window.innerWidth - 0.5) * 2;
-      const y = (event.clientY / window.innerHeight - 0.5) * 2;
-      root.style.setProperty("--pointer-x", x.toFixed(3));
-      root.style.setProperty("--pointer-y", y.toFixed(3));
-      visualStack.style.transform = `rotateY(${x * 14 - 18}deg) rotateX(${y * -8 + 12}deg)`;
-    });
+    if (!prefersReducedMotion) {
+      window.addEventListener("pointermove", (event) => {
+        const x = (event.clientX / window.innerWidth - 0.5) * 2;
+        const y = (event.clientY / window.innerHeight - 0.5) * 2;
+        root.style.setProperty("--pointer-x", x.toFixed(3));
+        root.style.setProperty("--pointer-y", y.toFixed(3));
+        visualStack.style.transform = `rotateY(${x * 14 - 18}deg) rotateX(${y * -8 + 12}deg)`;
+      });
+    }
 
     updateLens(lensProgress);
-    requestAnimationFrame(animateLens);
+    if (!prefersReducedMotion) {
+      requestAnimationFrame(animateLens);
+    }
   </script>
 </body>
 </html>
