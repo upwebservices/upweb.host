@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luma Vision Clinic | See Life Clearly</title>
+  <meta
+    name="description"
+    content="A modern optical clinic landing page with a cinematic blur-to-focus glasses effect, premium eye care messaging, and one-page layout."
+  >
+  <style>
+    :root {
+      --bg: #041122;
+      --bg-soft: #0a1d35;
+      --card: rgba(10, 31, 56, 0.62);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #ecf4ff;
+      --muted: #9fb4ce;
+      --primary: #4bd7ff;
+      --secondary: #7d8cff;
+      --accent: #8ef7c9;
+      --shadow: 0 35px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(75, 215, 255, 0.16), transparent 24%),
+        radial-gradient(circle at 80% 10%, rgba(125, 140, 255, 0.18), transparent 22%),
+        radial-gradient(circle at 50% 65%, rgba(142, 247, 201, 0.07), transparent 24%),
+        linear-gradient(160deg, #030b16 0%, #07182b 52%, #020812 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      width: 34rem;
+      height: 34rem;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.32;
+    }
+
+    body::before {
+      top: -10rem;
+      left: -12rem;
+      background: rgba(75, 215, 255, 0.18);
+    }
+
+    body::after {
+      right: -10rem;
+      bottom: 12rem;
+      background: rgba(125, 140, 255, 0.18);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+      width: min(1200px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 70px 70px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 92%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .nav {
+      position: sticky;
+      top: 1rem;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 1rem 0 2.25rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(5, 15, 28, 0.72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      width: 2.55rem;
+      height: 2.55rem;
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(75, 215, 255, 0.22), rgba(125, 140, 255, 0.28));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.08), 0 8px 22px rgba(75, 215, 255, 0.22);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, 0.75);
+    }
+
+    .brand-mark::before {
+      width: 1.45rem;
+      height: 0.78rem;
+      left: 0.28rem;
+    }
+
+    .brand-mark::after {
+      width: 1.45rem;
+      height: 0.78rem;
+      right: 0.28rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 0.85rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, rgba(75, 215, 255, 0.25), rgba(125, 140, 255, 0.25));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      font-weight: 600;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 2rem;
+      align-items: center;
+      padding: 3rem 0 5rem;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.52rem 0.92rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #cfe8ff;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    h1 {
+      margin: 1.25rem 0 1.4rem;
+      font-size: clamp(3.1rem, 7vw, 6rem);
+      line-height: 0.93;
+      letter-spacing: -0.055em;
+    }
+
+    .hero-intro {
+      max-width: 38rem;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      min-height: 3.3rem;
+      padding: 0 1.3rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(75, 215, 255, 0.9), rgba(125, 140, 255, 0.88));
+      color: #03111f;
+      box-shadow: 0 18px 30px rgba(75, 215, 255, 0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 42rem;
+    }
+
+    .metric {
+      padding: 1rem 1rem 1.2rem;
+      border-radius: 1.3rem;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      box-shadow: var(--shadow);
+      transform-style: preserve-3d;
+    }
+
+    .metric-value {
+      display: block;
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .hero-title {
+      max-width: 12ch;
+      margin: 1.25rem 0 1rem;
+    }
+
+    .headline-lab {
+      position: relative;
+      max-width: 50rem;
+      padding: 0.2rem 0 1.5rem;
+    }
+
+    .vision-runway {
+      position: relative;
+      min-height: 9rem;
+      overflow: hidden;
+      border-radius: 1.8rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .vision-mask {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 9rem;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .vision-mask.focused {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      -webkit-mask-image:
+        radial-gradient(ellipse 110px 82px at calc(50% - 78px) 50%, #000 64%, transparent 70%),
+        radial-gradient(ellipse 110px 82px at calc(50% + 78px) 50%, #000 64%, transparent 70%);
+      mask-image:
+        radial-gradient(ellipse 110px 82px at calc(50% - 78px) 50%, #000 64%, transparent 70%),
+        radial-gradient(ellipse 110px 82px at calc(50% + 78px) 50%, #000 64%, transparent 70%);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+    }
+
+    .vision-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 2.5rem;
+      width: max-content;
+      animation: runway-scroll 18s linear infinite;
+      will-change: transform;
+    }
+
+    .vision-copy {
+      flex: 0 0 auto;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding-right: 1.2rem;
+    }
+
+    .vision-mask.blurred .vision-copy {
+      color: rgba(236, 244, 255, 0.68);
+      filter: blur(9px);
+    }
+
+    .vision-mask.focused .vision-copy {
+      color: #fbfdff;
+      text-shadow: 0 0 28px rgba(255, 255, 255, 0.12);
+    }
+
+    .glasses {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateZ(40px);
+      width: 18rem;
+      height: 7.3rem;
+      pointer-events: none;
+      z-index: 3;
+      filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.35));
+    }
+
+    .glasses::before,
+    .glasses::after {
+      content: "";
+      position: absolute;
+      top: 0.35rem;
+      width: 7rem;
+      height: 5.2rem;
+      border-radius: 45% / 48%;
+      border: 4px solid rgba(236, 244, 255, 0.82);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.02)),
+        radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.22), transparent 44%);
+      box-shadow:
+        inset 0 0 22px rgba(255, 255, 255, 0.08),
+        0 0 0 1px rgba(75, 215, 255, 0.18);
+      backdrop-filter: blur(6px) saturate(1.15);
+    }
+
+    .glasses::before {
+      left: 0.2rem;
+      transform: rotate(-4deg);
+    }
+
+    .glasses::after {
+      right: 0.2rem;
+      transform: rotate(4deg);
+    }
+
+    .bridge {
+      position: absolute;
+      top: 2.1rem;
+      left: 50%;
+      width: 2.4rem;
+      height: 1rem;
+      transform: translateX(-50%);
+      border-top: 4px solid rgba(236, 244, 255, 0.82);
+      border-radius: 999px;
+    }
+
+    .temple {
+      position: absolute;
+      top: 1.75rem;
+      width: 4.1rem;
+      height: 0.3rem;
+      background: linear-gradient(90deg, rgba(236, 244, 255, 0.8), rgba(236, 244, 255, 0));
+      border-radius: 999px;
+    }
+
+    .temple.left {
+      left: -2.9rem;
+      transform: rotate(-9deg);
+    }
+
+    .temple.right {
+      right: -2.9rem;
+      transform: rotate(9deg);
+      background: linear-gradient(90deg, rgba(236, 244, 255, 0), rgba(236, 244, 255, 0.8));
+    }
+
+    .glasses-glow {
+      position: absolute;
+      inset: -1rem;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(75, 215, 255, 0.2), transparent 60%);
+      filter: blur(18px);
+      z-index: -1;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 39rem;
+      display: grid;
+      place-items: center;
+      perspective: 1400px;
+      transform-style: preserve-3d;
+    }
+
+    .visual-stack {
+      position: relative;
+      width: min(100%, 34rem);
+      aspect-ratio: 0.92;
+      transform-style: preserve-3d;
+      transform: rotateY(-18deg) rotateX(12deg);
+      transition: transform 300ms ease;
+    }
+
+    .floating-card {
+      position: absolute;
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--card);
+      backdrop-filter: blur(22px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .scan-card {
+      inset: 8% 8% 28% 8%;
+      padding: 1.4rem;
+      transform: translateZ(80px);
+    }
+
+    .scan-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(75, 215, 255, 0.32), transparent 20%),
+        linear-gradient(135deg, rgba(125, 140, 255, 0.14), transparent 60%);
+      pointer-events: none;
+    }
+
+    .scan-header,
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .chip {
+      padding: 0.48rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #dff6ff;
+      font-size: 0.82rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .eye-orbital {
+      position: relative;
+      margin: 2rem auto 1.7rem;
+      width: min(100%, 17rem);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.65), rgba(75, 215, 255, 0.22) 14%, rgba(10, 31, 56, 0.15) 34%, rgba(10, 31, 56, 0.92) 61%),
+        radial-gradient(circle at 52% 50%, rgba(125, 140, 255, 0.18), transparent 55%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow:
+        inset 0 0 28px rgba(255, 255, 255, 0.08),
+        0 22px 45px rgba(0, 0, 0, 0.3);
+    }
+
+    .eye-orbital::before,
+    .eye-orbital::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      inset: 18%;
+      border: 1px solid rgba(75, 215, 255, 0.16);
+      animation: pulse 3.6s ease-in-out infinite;
+    }
+
+    .eye-orbital::after {
+      inset: 30%;
+      animation-delay: -1.8s;
+    }
+
+    .scan-line {
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      top: 26%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(142, 247, 201, 0.95), transparent);
+      box-shadow: 0 0 18px rgba(142, 247, 201, 0.65);
+      animation: scan 4.4s ease-in-out infinite;
+    }
+
+    .scan-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      font-size: 0.9rem;
+    }
+
+    .scan-grid > div {
+      padding: 0.8rem 0.85rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .prescription-card {
+      right: 0;
+      bottom: 4%;
+      width: 72%;
+      padding: 1.2rem;
+      transform: translateZ(125px) rotateZ(-7deg);
+    }
+
+    .prescription-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .prescription-grid strong,
+    .prescription-total strong {
+      display: block;
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .prescription-total {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .floating-badge {
+      position: absolute;
+      top: 8%;
+      right: 4%;
+      padding: 0.9rem 1rem;
+      border-radius: 1.2rem;
+      background: rgba(9, 25, 46, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      transform: translateZ(160px);
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .sections {
+      display: grid;
+      gap: 1.35rem;
+    }
+
+    .panel {
+      position: relative;
+      padding: 2rem;
+      border-radius: 2rem;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-header p {
+      max-width: 34rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .service-grid,
+    .story-grid,
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .service-card,
+    .story-card,
+    .testimonial-card {
+      position: relative;
+      padding: 1.35rem;
+      border-radius: 1.5rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transform-style: preserve-3d;
+      transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+    }
+
+    .service-card:hover,
+    .story-card:hover,
+    .testimonial-card:hover {
+      transform: translateY(-4px) rotateX(3deg);
+      border-color: rgba(75, 215, 255, 0.25);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .service-icon,
+    .story-index {
+      display: inline-grid;
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, rgba(75, 215, 255, 0.2), rgba(125, 140, 255, 0.18));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-weight: 700;
+    }
+
+    .service-card h3,
+    .story-card h3,
+    .doctor-copy h3,
+    .testimonial-card h3 {
+      margin: 0 0 0.55rem;
+      font-size: 1.18rem;
+      letter-spacing: -0.02em;
+    }
+
+    .service-card p,
+    .story-card p,
+    .doctor-copy p,
+    .testimonial-card p,
+    .contact-copy p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .story-card {
+      min-height: 14rem;
+    }
+
+    .doctor-panel,
+    .contact-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(260px, 0.85fr);
+      gap: 1.2rem;
+      align-items: stretch;
+    }
+
+    .doctor-card,
+    .contact-card {
+      position: relative;
+      padding: 1.7rem;
+      border-radius: 1.7rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .doctor-portrait {
+      position: relative;
+      min-height: 22rem;
+      border-radius: 1.6rem;
+      background:
+        radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.16), transparent 18%),
+        radial-gradient(circle at 50% 12%, rgba(75, 215, 255, 0.2), transparent 28%),
+        linear-gradient(180deg, rgba(9, 28, 52, 0.95), rgba(5, 15, 28, 1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .doctor-portrait::before {
+      content: "";
+      position: absolute;
+      inset: 12% 18%;
+      border-radius: 45% 45% 40% 40%;
+      background:
+        radial-gradient(circle at 50% 34%, rgba(255, 255, 255, 0.22), transparent 18%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      filter: blur(0.2px);
+    }
+
+    .doctor-silhouette {
+      position: absolute;
+      width: 46%;
+      aspect-ratio: 0.72;
+      border-radius: 40% 40% 18% 18%;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.12), transparent 18%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+      box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.06);
+    }
+
+    .doctor-silhouette::before,
+    .doctor-silhouette::after {
+      content: "";
+      position: absolute;
+      top: 28%;
+      width: 34%;
+      height: 12%;
+      border-radius: 999px;
+      border: 3px solid rgba(255, 255, 255, 0.75);
+    }
+
+    .doctor-silhouette::before {
+      left: 13%;
+    }
+
+    .doctor-silhouette::after {
+      right: 13%;
+    }
+
+    .doctor-silhouette span {
+      position: absolute;
+      top: 33%;
+      left: 50%;
+      width: 12%;
+      height: 0.2rem;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.75);
+      border-radius: 999px;
+    }
+
+    .doctor-list,
+    .contact-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .doctor-list div,
+    .contact-item {
+      padding: 0.95rem 1rem;
+      border-radius: 1.1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .doctor-list strong,
+    .contact-item strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .testimonial-card blockquote {
+      margin: 0 0 1rem;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #e7f3ff;
+    }
+
+    .stars {
+      letter-spacing: 0.18em;
+      color: #ffd87a;
+      margin-bottom: 0.85rem;
+    }
+
+    .contact-panel .contact-copy h2 {
+      margin: 0 0 0.8rem;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      letter-spacing: -0.04em;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(75, 215, 255, 0.14), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(125, 140, 255, 0.16), transparent 28%);
+      pointer-events: none;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 2rem 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .floating-orb {
+      position: absolute;
+      width: 11rem;
+      height: 11rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(75, 215, 255, 0.22), transparent 58%);
+      filter: blur(10px);
+      opacity: 0.9;
+      pointer-events: none;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      top: 4%;
+      right: 22%;
+    }
+
+    .orb-2 {
+      bottom: 12%;
+      left: 2%;
+      animation-delay: -3s;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(0.98);
+        opacity: 0.45;
+      }
+      50% {
+        transform: scale(1.04);
+        opacity: 0.85;
+      }
+    }
+
+    @keyframes scan {
+      0%, 100% {
+        transform: translateY(-18%);
+      }
+      50% {
+        transform: translateY(220%);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate3d(0, 0, 0);
+      }
+      50% {
+        transform: translate3d(0, -18px, 0);
+      }
+    }
+
+    @keyframes runway-scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-50% - 1.25rem));
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero,
+      .doctor-panel,
+      .contact-panel,
+      .service-grid,
+      .story-grid,
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 1.6rem;
+      }
+
+      .hero-visual {
+        min-height: 33rem;
+      }
+
+      .hero-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page-shell {
+        width: min(100% - 1rem, 1200px);
+      }
+
+      .nav {
+        border-radius: 1.5rem;
+        padding: 1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .headline-layer {
+        font-size: clamp(2.4rem, 12vw, 4.2rem);
+      }
+
+      .headline-lab {
+        max-width: 100%;
+      }
+
+      .vision-runway,
+      .vision-mask {
+        min-height: 6.8rem;
+        height: 6.8rem;
+      }
+
+      .vision-mask.focused {
+        -webkit-mask-image:
+          radial-gradient(ellipse 78px 58px at calc(50% - 54px) 50%, #000 64%, transparent 70%),
+          radial-gradient(ellipse 78px 58px at calc(50% + 54px) 50%, #000 64%, transparent 70%);
+        mask-image:
+          radial-gradient(ellipse 78px 58px at calc(50% - 54px) 50%, #000 64%, transparent 70%),
+          radial-gradient(ellipse 78px 58px at calc(50% + 54px) 50%, #000 64%, transparent 70%);
+      }
+
+      .glasses {
+        width: 12.5rem;
+        height: 5.1rem;
+      }
+
+      .glasses::before,
+      .glasses::after {
+        width: 4.7rem;
+        height: 3.4rem;
+      }
+
+      .bridge {
+        top: 1.4rem;
+        width: 1.4rem;
+      }
+
+      .temple {
+        top: 1.15rem;
+        width: 2.5rem;
+      }
+
+      .temple.left {
+        left: -1.7rem;
+      }
+
+      .temple.right {
+        right: -1.7rem;
+      }
+
+      .vision-copy {
+        font-size: clamp(2rem, 9vw, 3rem);
+      }
+
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        padding: 1.3rem;
+      }
+
+      .scan-grid,
+      .prescription-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .eye-orbital::before,
+      .eye-orbital::after,
+      .scan-line,
+      .floating-orb,
+      .vision-track,
+      .btn,
+      .service-card,
+      .story-card,
+      .testimonial-card,
+      .visual-stack {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="page-shell">
+    <header class="nav">
+      <a class="brand" href="#top" aria-label="Luma Vision Clinic home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Luma Vision Clinic</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#experience">Experience</a>
+        <a href="#doctor">Doctor</a>
+        <a href="#reviews">Reviews</a>
+      </nav>
+      <a class="nav-cta" href="#contact">Book an exam</a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Advanced vision care for modern patients</span>
+          <h1 class="hero-title">See clearly again with modern eye care.</h1>
+          <div class="headline-lab">
+            <div class="vision-runway" aria-hidden="true">
+              <div class="vision-mask blurred">
+                <div class="vision-track">
+                  <span class="vision-copy">Clearer vision starts here • precise exams • designer eyewear • dry eye relief •</span>
+                  <span class="vision-copy">Clearer vision starts here • precise exams • designer eyewear • dry eye relief •</span>
+                </div>
+              </div>
+              <div class="vision-mask focused">
+                <div class="vision-track">
+                  <span class="vision-copy">Clearer vision starts here • precise exams • designer eyewear • dry eye relief •</span>
+                  <span class="vision-copy">Clearer vision starts here • precise exams • designer eyewear • dry eye relief •</span>
+                </div>
+              </div>
+              <div class="glasses" aria-hidden="true">
+                <span class="glasses-glow"></span>
+                <span class="bridge"></span>
+                <span class="temple left"></span>
+                <span class="temple right"></span>
+              </div>
+            </div>
+          </div>
+          <p class="hero-intro">
+            Premium eye exams, designer frames, dry eye care, and digital vision therapy in one immersive clinic experience.
+            The text now travels horizontally behind a fixed pair of glasses, sharpening only inside the lenses and blurring again as it exits.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Schedule a consultation</a>
+            <a class="btn btn-secondary" href="#services">Explore treatments</a>
+          </div>
+          <div class="hero-metrics">
+            <article class="metric tilt-card">
+              <span class="metric-value">20/20</span>
+              <span class="metric-label">Personalized vision plans tailored to lifestyle, work, and comfort.</span>
+            </article>
+            <article class="metric tilt-card">
+              <span class="metric-value">4.9/5</span>
+              <span class="metric-label">Trusted by families, professionals, and first-time contact lens patients.</span>
+            </article>
+            <article class="metric tilt-card">
+              <span class="metric-value">Same week</span>
+              <span class="metric-label">Fast appointments for exams, urgent irritation, and frame styling.</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <span class="floating-orb orb-1" aria-hidden="true"></span>
+          <span class="floating-orb orb-2" aria-hidden="true"></span>
+          <div class="visual-stack">
+            <article class="floating-card scan-card">
+              <div class="scan-header">
+                <strong>Precision retinal scan</strong>
+                <span class="chip">3D focus mapping</span>
+              </div>
+              <div class="eye-orbital">
+                <span class="scan-line" aria-hidden="true"></span>
+              </div>
+              <div class="scan-grid">
+                <div><strong>Cornea</strong> Smooth surface analysis</div>
+                <div><strong>Retina</strong> Early health detection</div>
+                <div><strong>Comfort</strong> Reduced digital strain</div>
+              </div>
+            </article>
+
+            <article class="floating-card prescription-card tilt-card">
+              <div class="card-header">
+                <strong>Prescription snapshot</strong>
+                <span class="chip">Updated today</span>
+              </div>
+              <div class="prescription-grid">
+                <div><strong>Left eye</strong> -1.50 / -0.75</div>
+                <div><strong>Right eye</strong> -1.25 / -0.50</div>
+                <div><strong>Blue light</strong> Recommended</div>
+                <div><strong>Lens type</strong> Ultra-thin premium</div>
+              </div>
+              <div class="prescription-total">
+                <strong>Visual outcome</strong>
+                Sharper distance vision, reduced night glare, and better screen comfort.
+              </div>
+            </article>
+
+            <div class="floating-badge">
+              <strong>Designed for clarity</strong><br>
+              From medical exams to frame styling, every touchpoint feels refined.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="sections">
+        <section class="panel" id="services">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">Everything in one clinic</span>
+              <h2>Care that feels precise, calm, and premium.</h2>
+            </div>
+            <p>
+              The page blends a cinematic 3D look with reassuring medical language so visitors understand this is both
+              a modern brand and a trusted eye care clinic.
+            </p>
+          </div>
+          <div class="service-grid">
+            <article class="service-card tilt-card">
+              <div class="service-icon">01</div>
+              <h3>Comprehensive eye exams</h3>
+              <p>Advanced diagnostics, refraction testing, retinal imaging, and a complete health review for adults and children.</p>
+            </article>
+            <article class="service-card tilt-card">
+              <div class="service-icon">02</div>
+              <h3>Designer frames and lenses</h3>
+              <p>Prescription lenses, anti-fatigue coatings, blue-light protection, and frame curation matched to face shape and style.</p>
+            </article>
+            <article class="service-card tilt-card">
+              <div class="service-icon">03</div>
+              <h3>Dry eye and digital strain relief</h3>
+              <p>Comfort-focused treatment plans for screen fatigue, blurred near vision, light sensitivity, and long workdays.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="experience">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">Patient journey</span>
+              <h2>From blur to focus in three seamless steps.</h2>
+            </div>
+            <p>
+              The storytelling section reinforces the hero animation: your visitors start with uncertainty, move through expert guidance,
+              and finish with confident, sharper vision.
+            </p>
+          </div>
+          <div class="story-grid">
+            <article class="story-card tilt-card">
+              <div class="story-index">A</div>
+              <h3>Spot the issue early</h3>
+              <p>Subtle headaches, eye strain, or night glare often point to a prescription change or surface dryness that should be evaluated.</p>
+            </article>
+            <article class="story-card tilt-card">
+              <div class="story-index">B</div>
+              <h3>Map your eyes in detail</h3>
+              <p>We combine imaging, refraction, and lifestyle questions to understand how your eyes behave at work, at night, and on screens.</p>
+            </article>
+            <article class="story-card tilt-card">
+              <div class="story-index">C</div>
+              <h3>Leave with clear direction</h3>
+              <p>Whether you need glasses, contacts, treatment, or reassurance, every visit ends with a practical plan and a polished experience.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="doctor">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">Meet the specialist</span>
+              <h2>Clinical expertise with a boutique feel.</h2>
+            </div>
+            <p>
+              Use this area to present the clinic owner or lead doctor. The layout keeps the visual identity premium while leaving room
+              for credibility markers like certifications and specialties.
+            </p>
+          </div>
+          <div class="doctor-panel">
+            <div class="doctor-card doctor-copy">
+              <h3>Dr. Elena Hart, OD</h3>
+              <p>
+                Known for precise diagnostics and warm, unrushed consultations, Dr. Hart helps patients see better and understand their vision with confidence.
+              </p>
+              <div class="doctor-list">
+                <div>
+                  <strong>Specialties</strong>
+                  Complex prescriptions, digital eye strain, dry eye care, and contact lens fittings.
+                </div>
+                <div>
+                  <strong>Approach</strong>
+                  Every exam balances high-resolution technology with practical recommendations that fit daily life.
+                </div>
+                <div>
+                  <strong>Clinic promise</strong>
+                  Clear explanations, elevated service, and eyewear that feels as good as it looks.
+                </div>
+              </div>
+            </div>
+            <div class="doctor-card doctor-portrait" aria-hidden="true">
+              <div class="doctor-silhouette">
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="reviews">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">Patient voices</span>
+              <h2>What people notice first is how different the experience feels.</h2>
+            </div>
+            <p>
+              Social proof rounds out the page while matching the same calm, polished design language as the hero and service sections.
+            </p>
+          </div>
+          <div class="testimonial-grid">
+            <article class="testimonial-card tilt-card">
+              <div class="stars">★★★★★</div>
+              <blockquote>
+                “The exam felt incredibly modern, and the doctor explained everything so clearly. My new lenses changed the way I work on screens.”
+              </blockquote>
+              <h3>Isabella M.</h3>
+            </article>
+            <article class="testimonial-card tilt-card">
+              <div class="stars">★★★★★</div>
+              <blockquote>
+                “I came in for blurry night driving and left with answers, options, and frames that actually fit my face. The whole visit felt premium.”
+              </blockquote>
+              <h3>Marcus T.</h3>
+            </article>
+            <article class="testimonial-card tilt-card">
+              <div class="stars">★★★★★</div>
+              <blockquote>
+                “My eyes were constantly dry by the afternoon. Their treatment plan helped almost immediately, and the follow-up care was excellent.”
+              </blockquote>
+              <h3>Priya L.</h3>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="contact">
+          <div class="contact-panel">
+            <div class="contact-copy">
+              <span class="eyebrow">Ready to see clearly?</span>
+              <h2>Book a visit and make your first impression unforgettable.</h2>
+              <p>
+                This call-to-action section is designed to convert. Replace the sample phone number, address, and booking links with the clinic’s real details.
+              </p>
+              <div class="contact-actions">
+                <a class="btn btn-primary" href="tel:+15551234567">Call (555) 123-4567</a>
+                <a class="btn btn-secondary" href="mailto:hello@lumavisionclinic.com">Email the clinic</a>
+              </div>
+            </div>
+            <div class="contact-card">
+              <div class="contact-list">
+                <div class="contact-item">
+                  <strong>Clinic hours</strong>
+                  Mon-Fri 9:00 AM - 6:00 PM<br>
+                  Saturday 10:00 AM - 3:00 PM
+                </div>
+                <div class="contact-item">
+                  <strong>Location</strong>
+                  1250 Vision Avenue<br>
+                  Suite 210, Downtown District
+                </div>
+                <div class="contact-item">
+                  <strong>Services by appointment</strong>
+                  Exams, contacts, dry eye consults, pediatric visits, and frame styling sessions.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 Luma Vision Clinic. Designed as a one-page concept for an optical clinic.</span>
+      <span>One file setup with layout, styling, and hero effects in a single document.</span>
+    </footer>
+  </div>
+
+</body>
+</html>
